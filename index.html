@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Placemate - Placement Preparation Platform</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Poppins", sans-serif;
+      background-color: #ffffff;
+      color: #1e1e1e;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      background-color: #4a90e2;
+      color: white;
+      padding: 15px 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 25px;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      opacity: 0.8;
+    }
+
+    /* Hero */
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 90px 100px;
+      background-color: #e9f1ff;
+    }
+
+    .hero-text {
+      max-width: 50%;
+    }
+
+    .hero-text h1 {
+      font-size: 46px;
+      color: #4a90e2;
+      margin-bottom: 15px;
+      line-height: 1.2;
+    }
+
+    .hero-text p {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+
+    .hero-text button {
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: 0.3s;
+      box-shadow: 0 3px 10px rgba(74, 144, 226, 0.3);
+    }
+
+    .hero-text button:hover {
+      background-color: #3a7ed1;
+    }
+
+    .hero img {
+      width: 430px;
+      border-radius: 12px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Features */
+    .features {
+      text-align: center;
+      padding: 80px 100px;
+    }
+
+    .features h2 {
+      font-size: 32px;
+      color: #4a90e2;
+      margin-bottom: 50px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 30px;
+    }
+
+    .feature-card {
+      background-color: #f8fbff;
+      border: 1px solid #dce8fa;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+      transition: 0.3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+    }
+
+    .feature-card h3 {
+      color: #4a90e2;
+      margin-bottom: 12px;
+      font-size: 20px;
+    }
+
+    /* How It Works */
+    .how-it-works {
+      padding: 80px 100px;
+      text-align: center;
+    }
+
+    .how-it-works h2 {
+      color: #4a90e2;
+      font-size: 32px;
+      margin-bottom: 40px;
+    }
+
+    .steps {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .step {
+      background-color: #f8fbff;
+      border: 1px solid #dce8fa;
+      border-radius: 12px;
+      width: 280px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: 0.3s;
+    }
+
+    .step:hover {
+      transform: translateY(-5px);
+    }
+
+    .step h3 {
+      color: #4a90e2;
+      margin-bottom: 10px;
+    }
+
+    /* About */
+    .about {
+      background-color: #e9f1ff;
+      padding: 90px 100px;
+      text-align: center;
+    }
+
+    .about h2 {
+      color: #4a90e2;
+      font-size: 36px;
+      margin-bottom: 25px;
+    }
+
+    .about p {
+      max-width: 950px;
+      margin: 0 auto;
+      font-size: 18px;
+      line-height: 1.8;
+      color: #333;
+      margin-bottom: 18px;
+    }
+
+    /* Companies */
+    .companies {
+      padding: 70px 100px;
+      text-align: center;
+    }
+
+    .companies h2 {
+      color: #4a90e2;
+      font-size: 32px;
+      margin-bottom: 35px;
+    }
+
+    .company-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 30px;
+      justify-items: center;
+    }
+
+    .company-card {
+      background-color: #f8fbff;
+      border: 1px solid #dce8fa;
+      border-radius: 12px;
+      padding: 20px;
+      width: 160px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+      transition: 0.3s;
+    }
+
+    .company-card:hover {
+      background-color: #eef5ff;
+      transform: translateY(-5px);
+    }
+
+    .company-card img {
+      width: 100%;
+      height: 50px;
+      object-fit: contain;
+    }
+
+    /* CTA */
+    .cta {
+      background-color: #4a90e2;
+      color: white;
+      text-align: center;
+      padding: 60px 40px;
+    }
+
+    .cta h2 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    .cta p {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
+    .cta button {
+      background-color: white;
+      color: #4a90e2;
+      border: none;
+      padding: 12px 25px;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .cta button:hover {
+      background-color: #eef5ff;
+    }
+
+    footer {
+      background-color: #4a90e2;
+      color: white;
+      text-align: center;
+      padding: 25px;
+      font-size: 15px;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 60px 40px;
+      }
+      .hero-text {
+        max-width: 100%;
+      }
+      .hero img {
+        width: 85%;
+        margin-top: 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">PLACEMATE</div>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#about">About</a>
+      <a href="#">Login</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Your Perfect Placement Companion</h1>
+      <p>Prepare for aptitude, reasoning, technical, and interview rounds — all in one place.  
+      Track your progress, discover your strengths, and enhance your skills with Placemate.</p>
+      <button>Start Preparing</button>
+    </div>
+    <img src="https://cdn.pixabay.com/photo/2016/11/19/14/00/laptop-1839876_1280.jpg" alt="Placement Preparation">
+  </section>
+
+  <section class="features">
+    <h2>What You’ll Get</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>Aptitude Practice</h3>
+        <p>Sharpen your logical and numerical skills with high-quality aptitude tests designed for placements.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Technical Practice</h3>
+        <p>Master programming fundamentals and company-specific technical interview questions.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Progress Tracking</h3>
+        <p>Monitor your improvement, analyze your weak spots, and visualize growth with performance charts.</p>
+      </div>
+      <div class="feature-card">
+        <h3>Interview Preparation</h3>
+        <p>Get ready for HR and technical rounds with curated Q&A and mock interview sessions.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="how-it-works">
+    <h2>How Placemate Works</h2>
+    <div class="steps">
+      <div class="step">
+        <h3>1. Register</h3>
+        <p>Create your student account and access personalized preparation material.</p>
+      </div>
+      <div class="step">
+        <h3>2. Practice</h3>
+        <p>Attempt quizzes, challenges, and tests for various placement companies.</p>
+      </div>
+      <div class="step">
+        <h3>3. Track</h3>
+        <p>Check your analytics dashboard and identify areas that need focus.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <h2>About Placemate</h2>
+    <p>Placemate is an integrated platform created to simplify the entire placement preparation process for students. We understand that preparing for placements can be overwhelming — managing aptitude, reasoning, technical knowledge, and interview readiness all at once. Placemate solves this by providing everything in one structured place.</p>
+    <p>Our goal is to make placement preparation smarter, not harder. With real-time progress tracking, AI-based performance analysis, and regularly updated question banks from top recruiters, students get the most accurate and effective preparation experience.</p>
+    <p>Placemate isn’t just a website — it’s your study companion, tracking your growth and helping you achieve your dream job through consistency and guided learning.</p>
+  </section>
+
+  <section class="companies">
+    <h2>Top Companies You Can Prepare For</h2>
+    <div class="company-grid">
+      <div class="company-card"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/TCS_New_Logo.svg" alt="TCS"></div>
+      <div class="company-card"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Accenture_logo.svg" alt="Accenture"></div>
+      <div class="company-card"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Wipro_Primary_Logo_Color_RGB.svg" alt="Wipro"></div>
+      <div class="company-card"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Infosys_logo.svg" alt="Infosys"></div>
+      <div class="company-card"><img src="https://upload.wikimedia.org/wikipedia/commons/1/19/IBM_logo.svg" alt="IBM"></div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>Start Your Placement Journey with Placemate</h2>
+    <p>Join thousands of students already preparing smarter, not harder.</p>
+    <button>Get Started Now</button>
+  </section>
+
+  <footer>
+    © 2025 Placemate | All Rights Reserved
+  </footer>
+</body>
+</html>
