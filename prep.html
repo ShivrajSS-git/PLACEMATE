@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PLACEMATE - Company Prep</title>
+  <style>
+    body { 
+      font-family:'Segoe UI', sans-serif; 
+      margin:0; 
+      background: linear-gradient(135deg, #f0f4ff, #ffffff); 
+      color: #1e293b; 
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+    body.dark {
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: #f1f5f9;
+    }
+
+    /* Navbar */
+    .navbar { 
+      display:flex; justify-content:space-between; align-items:center; 
+      padding:20px 40px; background:#f8fafc; 
+      box-shadow:0 2px 8px rgba(0,0,0,0.05); 
+      position:sticky; top:0; z-index:1000; 
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+    body.dark .navbar { background:#1e293b; }
+    .navbar h1{margin:0; font-size:1.8em; color:#1e40af; transition: color 0.5s ease;}
+    body.dark .navbar h1 { color:#60a5fa; }
+    .navbar .user{font-size:1em; color:#475569; transition: color 0.5s ease;}
+    body.dark .navbar .user{color:#cbd5e1;}
+    .toggle-btn { cursor:pointer; font-size:1.2em; background:none; border:none; color:#1e40af; transition: color 0.5s ease;}
+    body.dark .toggle-btn { color:#60a5fa; }
+
+    /* Container */
+    .container {
+      max-width:800px; 
+      margin:40px auto; 
+      padding:40px; 
+      border-radius:20px; 
+      background: rgba(255,255,255,0.15); 
+      backdrop-filter: blur(20px) saturate(180%); 
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.05);
+      transition: all 0.5s ease;
+      text-align:center;
+    }
+    body.dark .container {
+      background: rgba(30,41,59,0.25);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+    }
+
+    .logo{
+      width:150px; height:150px; margin:0 auto 20px; display:flex; align-items:center; justify-content:center;
+      border-radius:50%; background: rgba(241,245,249,0.25); border:2px solid #2563eb;
+      transition: all 0.5s ease;
+    }
+    body.dark .logo { background: rgba(15,23,42,0.25); border:2px solid #60a5fa; }
+    .logo img{max-width:100%; max-height:100%; object-fit:contain;}
+
+    h2{font-size:2em; margin-bottom:20px; transition: color 0.5s ease; color:#1e40af;}
+    body.dark h2 { color:#60a5fa; }
+
+    p{font-size:1.1em; line-height:1.6; margin-bottom:40px; color:#475569; transition: color 0.5s ease;}
+    body.dark p { color:#cbd5e1; }
+
+    /* Options */
+    .options{display:flex; justify-content:center; gap:20px; flex-wrap:wrap;}
+    .options button{
+      padding:15px 25px; border:none; border-radius:25px; background:#60a5fa; color:white; 
+      font-weight:600; cursor:pointer; font-size:1em; transition: all 0.3s ease;
+      box-shadow:0 6px 15px rgba(0,0,0,0.1);
+    }
+    .options button:hover{
+      background:#2563eb; transform: scale(1.05); box-shadow:0 12px 25px rgba(0,0,0,0.15);
+    }
+    body.dark .options button{
+      background:#2563eb; color:white;
+    }
+    body.dark .options button:hover{
+      background:#60a5fa;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="navbar">
+  <h1>PLACEMATE</h1>
+  <div>
+    <button class="toggle-btn" onclick="toggleDarkMode()">🌙</button>
+    <span class="user">Hello, User</span>
+  </div>
+</div>
+
+<div class="container" id="companyContainer">
+  <div class="logo"><img id="companyLogo" src=""></div>
+  <h2 id="companyName"></h2>
+  <p id="companyDesc"></p>
+  <div class="options">
+    <button onclick="goToPrep('Aptitude')">Aptitude</button>
+    <button onclick="goToPrep('Logical')">Logical</button>
+    <button onclick="goToPrep('Reasoning')">Reasoning</button>
+    <button onclick="goToPrep('Interview')">Interview Prep</button>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+<script>
+  const companies = {
+    "Google": {logo:"https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg", desc:"Tech giant focusing on search engine, AI, and cloud services. Great for coding and problem-solving preparation."},
+    "Amazon": {logo:"https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg", desc:"E-commerce and cloud leader. Aptitude and reasoning skills are heavily tested in placement exams."},
+    "Microsoft": {logo:"https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg", desc:"Known for software, cloud, and AI projects. Logical reasoning and coding skills are key."},
+    "Infosys": {logo:"https://www.infosys.com/content/dam/infosys-web/en/global-resource/media-resources/infosys-logo-png.png", desc:"IT services and consulting company. Focuses on aptitude, logical, and coding tests for placements."},
+    "TCS": {logo:"https://upload.wikimedia.org/wikipedia/commons/0/0e/Tata_Consultancy_Services_old_logo.svg", desc:"One of the largest IT services companies. Placement prep includes reasoning, aptitude, and interviews."},
+    "Facebook": {logo:"https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_%282019%29.png", desc:"Social media giant. Focuses on coding, problem solving, and reasoning tests in placements."},
+    "Accenture": {logo:"https://upload.wikimedia.org/wikipedia/commons/c/cd/Accenture.svg", desc:"Global consulting and services company. Tests include aptitude, logical reasoning, and coding rounds."},
+    "Wipro": {logo:"https://upload.wikimedia.org/wikipedia/commons/a/a0/Wipro_Primary_Logo_Color_RGB.svg", desc:"IT consulting company. Focus on logical, aptitude, and technical preparation for placements."},
+    "Deloitte": {logo:"https://www.logo.wine/a/logo/Deloitte/Deloitte-Logo.wine.svg", desc:"Global consulting firm. Placement prep includes aptitude, reasoning, and interviews."}
+  };
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const company = urlParams.get('name');
+
+  const logoEl = document.getElementById('companyLogo');
+  const nameEl = document.getElementById('companyName');
+  const descEl = document.getElementById('companyDesc');
+
+  if(companies[company]){
+    logoEl.src = companies[company].logo;
+    nameEl.textContent = company;
+    descEl.textContent = companies[company].desc;
+  } else {
+    document.getElementById('companyContainer').innerHTML = "<h2>Company not found</h2>";
+  }
+
+  function goToPrep(type){
+    window.location.href = `testprep.html?company=${encodeURIComponent(company)}&type=${encodeURIComponent(type)}`;
+  }
+
+  // Smooth animations on container
+  anime({
+    targets: '#companyContainer',
+    opacity: [0,1],
+    translateY: [30,0],
+    scale: [0.97,1],
+    duration: 800,
+    easing: 'easeOutCubic'
+  });
+
+  // Dark mode toggle
+  function toggleDarkMode() {
+    document.body.classList.toggle('dark');
+    document.querySelector('.toggle-btn').textContent = document.body.classList.contains('dark') ? "☀️" : "🌙";
+  }
+  // Apply dark mode if it was active on index
+window.addEventListener('load', () => {
+  if(localStorage.getItem('darkMode') === 'true'){
+    document.body.classList.add('dark');
+  }
+});
+
+
+</script>
+
+</body>
+</html>
